@@ -1,0 +1,177 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d18">
+<meta name="description" content="Upload a photo to automatically mark visible image-space dimensions. Runs with a private, dependency-free image-analysis algorithm.">
+<title>Arix Dimension Auto</title>
+<style>
+:root{color-scheme:dark;--bg:#080d18;--panel:#111a2a;--panel2:#152136;--line:#293950;--muted:#97a8c0;--text:#f4f7fc;--cyan:#71e8f2;--blue:#82a7ff;--mint:#73e5ba;--amber:#ffc477;--red:#ff9aab;--radius:18px;--shadow:0 22px 60px #0004}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 60% -18%,#31549a33,transparent 48%),var(--bg);color:var(--text);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}.shell{max-width:1500px;margin:auto;padding:24px}.top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(140deg,#8ab1ff,#62ecdc);color:#07111b;font-size:24px;font-weight:950;box-shadow:0 8px 28px #70caff2b}.brand-name{font-weight:900;letter-spacing:.01em;font-size:16px}.brand-sub{color:var(--muted);font-size:11px;margin-top:2px}.local-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #245345;background:#10271f;color:#9ef1ce;border-radius:999px;padding:8px 12px;font-size:11px;font-weight:800}.dot{width:7px;height:7px;background:#74e7b5;border-radius:50%;box-shadow:0 0 12px #74e7b588}.intro{max-width:880px;margin:0 auto 22px;text-align:center}.eyebrow{color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}.intro h1{font-size:clamp(29px,4.4vw,51px);line-height:1.06;letter-spacing:-.045em;margin:10px 0 12px}.intro p{max-width:690px;margin:0 auto;color:#9eafc6;line-height:1.7;font-size:13px}.drop{max-width:880px;margin:0 auto 18px;border:1px dashed #486181;border-radius:18px;background:linear-gradient(135deg,#142239,#0f1929);padding:25px 20px;text-align:center;transition:.18s;cursor:pointer}.drop:hover,.drop.drag{border-color:var(--cyan);background:#14283c}.upload-icon{width:52px;height:52px;margin:0 auto 11px;border:1px solid #375778;background:#1a2f4b;border-radius:16px;display:grid;place-items:center;color:var(--cyan);font-size:25px}.drop h2{font-size:16px;margin:0 0 5px}.drop p{color:#9aacc4;margin:0;font-size:12px}.drop small{display:block;color:#7388a4;margin-top:12px;font-size:10px}.actions{display:flex;justify-content:center;gap:9px;margin-top:15px;flex-wrap:wrap}.btn{border:1px solid #344862;background:#18263b;color:#eef5ff;border-radius:10px;padding:10px 14px;font-weight:800;font-size:12px;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}.btn:hover{background:#223751;border-color:#52779a}.btn.primary{background:linear-gradient(135deg,#5f88e5,#456ac2);border-color:#7396ec;color:white}.btn:disabled{opacity:.38;cursor:not-allowed}.hidden{display:none!important}.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;align-items:start}.panel{background:linear-gradient(155deg,#121c2d,#0f1725);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);min-width:0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 17px;border-bottom:1px solid #25344a}.panel-head strong{font-size:12px}.panel-head span{color:var(--muted);font-size:10px}.stage{min-height:420px;position:relative;display:flex;align-items:center;justify-content:center;padding:16px;background:radial-gradient(ellipse at center,#172236,#0a101b 76%);overflow:hidden}.stage.empty{min-height:460px}.stage canvas{display:block;max-width:100%;max-height:calc(100vh - 205px);height:auto;object-fit:contain;box-shadow:0 12px 42px #0008;border-radius:4px}.empty-content{text-align:center;padding:32px;max-width:410px}.empty-icon{width:70px;height:70px;margin:0 auto 16px;border-radius:22px;display:grid;place-items:center;background:#172b44;border:1px solid #304d70;color:#8de7f4;font-size:30px}.empty-content h3{margin:0 0 7px;font-size:16px}.empty-content p{margin:0;color:#8fa3bd;font-size:12px;line-height:1.7}.stage-foot{position:absolute;bottom:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:10px;pointer-events:none;flex-wrap:wrap}.foot-chip{border:1px solid #33445c;background:#0b1320e8;border-radius:8px;padding:6px 9px;font-size:10px;color:#bccbe0}.sidebar{display:flex;flex-direction:column;gap:12px}.section{padding:15px 16px}.section h3{font-size:12px;margin:0 0 11px}.select-row{display:flex;gap:9px;align-items:center}.select-row label{font-size:11px;color:#a7b7cc;flex:1}.select-row select{width:140px;background:#0a1220;border:1px solid #34445d;border-radius:9px;color:#eef5ff;padding:9px}.notice{border:1px solid #354763;background:#142136;color:#b8c9df;border-radius:11px;padding:11px 12px;font-size:11px;line-height:1.6}.notice.warn{border-color:#5d472c;background:#2a2117;color:#f0d7ad}.notice strong{color:#f3f7ff}.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.stat{border:1px solid #2b3d55;background:#0d1625;border-radius:11px;padding:11px}.stat label{display:block;color:#8ea2bd;font-size:10px}.stat b{font-size:19px;letter-spacing:-.03em;display:block;margin-top:3px}.region-list{display:flex;flex-direction:column;gap:8px}.region{background:#0e1725;border:1px solid #293a52;border-radius:11px;padding:10px}.region-top{display:flex;align-items:center;gap:8px}.swatch{height:10px;width:10px;border-radius:3px;flex-shrink:0}.region-name{font-size:11px;font-weight:850;flex:1}.quality{font-size:9px;border-radius:6px;padding:4px 6px;background:#142d29;border:1px solid #265146;color:#9fe8cb}.quality.medium{background:#2b2519;border-color:#55452c;color:#ffda9d}.quality.low{background:#2a2023;border-color:#56353d;color:#ffb4bf}.region-dims{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:9px}.dim{background:#111e30;border:1px solid #24354c;border-radius:8px;padding:7px}.dim label{font-size:9px;letter-spacing:.04em;color:#91a5bf;display:block}.dim b{font-size:12px;display:block;margin-top:2px}.region-foot{font-size:10px;color:#7f93ad;margin-top:8px;line-height:1.55}.empty-list{border:1px dashed #34455e;padding:14px;border-radius:10px;font-size:11px;color:#8fa2ba;text-align:center}.loading{display:flex;align-items:center;gap:10px;justify-content:center;color:#c2d3e8;font-size:12px}.spinner{height:17px;width:17px;border:2px solid #2a405b;border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.progress{height:4px;background:#1a2b40;border-radius:99px;overflow:hidden;margin-top:12px}.progress i{display:block;width:35%;height:100%;background:linear-gradient(90deg,#6c9aff,#62eadc);animation:move 1.5s ease-in-out infinite}@keyframes move{0%{transform:translateX(-110%)}100%{transform:translateX(330%)}}.footer{max-width:1000px;margin:22px auto 0;text-align:center;font-size:10px;line-height:1.7;color:#71849f}.toast{position:fixed;bottom:19px;left:50%;transform:translateX(-50%);z-index:10;max-width:min(540px,calc(100% - 26px));padding:11px 15px;border:1px solid #435671;background:#101b2b;color:#eef5ff;border-radius:11px;font-size:12px;box-shadow:0 14px 40px #0008}.toast.error{border-color:#754351;color:#ffc2cb}.toast.success{border-color:#2b6655;color:#b3f4d4}.disabled-note{margin-top:10px;color:#9bacc2;font-size:10px;line-height:1.55}@media(max-width:1000px){.layout{grid-template-columns:minmax(0,1fr) 290px}.shell{padding:17px}}@media(max-width:760px){.layout{grid-template-columns:1fr}.top{align-items:flex-start}.intro h1{font-size:35px}.stage,.stage.empty{min-height:310px}.stage canvas{max-height:65vh}.shell{padding:13px}.drop{padding:22px 14px}.local-pill{font-size:10px;padding:7px 9px}.workspace-full{min-width:0}}@media(max-width:430px){.brand-sub{display:none}.top{gap:9px}.intro h1{font-size:31px}.stage-foot{position:static;padding:0 12px 12px}.stage{display:block;padding:10px}.stage canvas{margin:auto}.stage-foot{display:flex}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div class="brand"><div class="logo">↔</div><div><div class="brand-name">ARIX DIMENSION AUTO</div><div class="brand-sub">Automatic photo-region dimension map</div></div></div>
+    <div class="local-pill"><span class="dot"></span> NO THIRD-PARTY API</div>
+  </header>
+  <section class="intro">
+    <div class="eyebrow">Upload once · automatic analysis</div>
+    <h1>One photo in.<br><span style="color:var(--cyan)">Dimension map out.</span></h1>
+    <p>Upload a picture and the app immediately searches for visually separable regions, marks their visible width and height on the same image, and prepares a downloadable annotated result. No manual drawing or calibration steps.</p>
+  </section>
+  <section id="drop" class="drop" tabindex="0" role="button" aria-label="Upload an image">
+    <div class="upload-icon">↑</div><h2>Drop your image here</h2><p>or choose a photo from this device</p><small>JPG · PNG · WEBP · up to 20 MB · image stays within your own app</small>
+    <div class="actions"><button class="btn primary" id="chooseBtn" type="button">Choose image</button><button class="btn" id="demoBtn" type="button">Try sample scene</button></div>
+    <input id="fileInput" class="hidden" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/bmp">
+  </section>
+  <div id="loader" class="panel section hidden" aria-live="polite"><div class="loading"><span class="spinner"></span><span id="loadText">Preparing image…</span></div><div class="progress"><i></i></div></div>
+  <main id="resultLayout" class="layout hidden">
+    <section class="panel workspace-full">
+      <div class="panel-head"><strong>ANNOTATED IMAGE</strong><span id="imageMeta">Waiting for image</span></div>
+      <div id="stage" class="stage"><div class="empty-content"><div class="empty-icon">▧</div><h3>Your result appears here</h3><p>Upload an image above to begin automatic analysis.</p></div></div>
+      <div class="stage-foot" style="position:relative;padding:10px 12px;bottom:auto;left:auto;right:auto"><span class="foot-chip" id="regionStatus">0 regions detected</span><span class="foot-chip">Solid lines = visible image spans</span></div>
+      <div class="section" style="border-top:1px solid #25344a;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><div style="min-width:180px"><strong style="font-size:12px">Finished image</strong><div style="color:var(--muted);font-size:10px;margin-top:3px">Export keeps the original photo with dimension tags.</div></div><div class="actions" style="margin:0"><button id="downloadBtn" class="btn primary" disabled>↓ Download annotated PNG</button><button id="newBtn" class="btn" type="button">Upload another</button></div></div>
+    </section>
+    <aside class="sidebar">
+      <section class="panel">
+        <div class="panel-head"><strong>AUTOMATIC RESULTS</strong><span id="methodTag">Local algorithm</span></div>
+        <div class="section"><div class="summary-grid"><div class="stat"><label>Regions proposed</label><b id="regionCount">—</b></div><div class="stat"><label>Detection status</label><b id="detectStatus" style="font-size:13px">Waiting</b></div></div><div id="summaryNote" class="notice">Upload a photo. The algorithm will automatically identify candidate foreground regions and annotate their visible spans.</div></div>
+      </section>
+      <section class="panel"><div class="panel-head"><strong>REGION DIMENSIONS</strong><span>image-space units</span></div><div class="section"><div class="select-row"><label for="unitSelect">Display unit</label><select id="unitSelect" aria-label="Display unit"><option value="px">Pixels (automatic)</option><option value="cm">Centimetres (needs scale)</option><option value="m">Metres (needs scale)</option><option value="in">Inches (needs scale)</option><option value="ft">Feet (needs scale)</option></select></div><div id="unitNote" class="disabled-note">True physical units cannot be derived from an uncalibrated photo. Automatic results are shown in image pixels to avoid inventing real-world sizes.</div><div class="divider" style="height:1px;background:#25344a;margin:13px 0"></div><div id="regionList" class="region-list"><div class="empty-list">No image analysed yet.</div></div></div></section>
+      <section class="panel"><div class="panel-head"><strong>WHAT THE NUMBERS MEAN</strong></div><div class="section"><div class="notice warn"><strong>Important accuracy note</strong><br>A single image has no built-in real-world ruler. The app reports visible 2D spans in pixels. Hidden depth and true 3D length/breadth/height cannot be reliably calculated without scale/depth information. Region detection is a pure visual heuristic, not a universal object-recognition model.</div></div></section>
+    </aside>
+  </main>
+  <div class="footer">Private by design · no external services, paid APIs, neural-network downloads or third-party libraries. The backend analyses a reduced RGB representation of the image. Results depend on contrast and scene complexity.</div>
+</div>
+<div id="toast" class="toast hidden" role="status"></div>
+<script>
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const drop = $('drop'), fileInput = $('fileInput'), stage = $('stage');
+  const colors = ['#61a5ff','#70e3bd','#ffbc72','#e19cff','#ff7d97','#f4df72','#72d7f4','#ffa77e'];
+  let originalImage = null, sourceName = 'image', analysis = null, annotatedCanvas = null, toastTimer = null;
+  function toast(message, kind='') { const el=$('toast'); el.textContent=message; el.className='toast '+kind; clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.add('hidden'),4200); }
+  function setLoading(on, text='Analysing the image…') { $('loader').classList.toggle('hidden',!on); $('loadText').textContent=text; $('chooseBtn').disabled=on; }
+  function openPicker(){ if(!fileInput.disabled)fileInput.click(); }
+  $('chooseBtn').addEventListener('click', e=>{e.stopPropagation();openPicker();});
+  drop.addEventListener('click', e=>{ if(e.target.closest('button'))return;openPicker(); });
+  drop.addEventListener('keydown', e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openPicker();}});
+  fileInput.addEventListener('change',()=>{const f=fileInput.files&&fileInput.files[0];if(f)loadFile(f);fileInput.value='';});
+  for(const ev of ['dragenter','dragover'])drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('drag');});
+  for(const ev of ['dragleave','drop'])drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('drag');});
+  drop.addEventListener('drop',e=>{const f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0];if(f)loadFile(f);});
+  $('newBtn').addEventListener('click',openPicker);
+  $('downloadBtn').addEventListener('click',downloadResult);
+  $('unitSelect').addEventListener('change',()=>{const unit=$('unitSelect').value;if(unit!=='px'){ $('unitNote').textContent='A real-world scale is not present in the photo, so '+({cm:'centimetres',m:'metres',in:'inches',ft:'feet'}[unit])+' would be a guess. The result stays in pixels until a real scale is available.';toast('Physical units need a real-world reference. Showing image pixels instead.','error');$('unitSelect').value='px';return;}$('unitNote').textContent='True physical units cannot be derived from an uncalibrated photo. Automatic results are shown in image pixels to avoid inventing real-world sizes.'; });
+
+  async function loadFile(file){
+    if(!file.type.startsWith('image/')){toast('Please choose a valid image file.','error');return;}
+    if(file.size>20*1024*1024){toast('This image is over 20 MB. Please choose a smaller image.','error');return;}
+    sourceName=file.name.replace(/\.[^.]+$/,'').slice(0,80)||'image';
+    setLoading(true,'Opening image…');$('resultLayout').classList.add('hidden');$('downloadBtn').disabled=true;
+    try{
+      const url=URL.createObjectURL(file), img=new Image();
+      await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error('This image could not be decoded.'));img.src=url;});
+      URL.revokeObjectURL(url);originalImage=img;
+      await processImage(img);
+    }catch(e){console.error(e);setLoading(false);toast(e.message||'Could not analyse this image.','error');}
+  }
+  function makeRaster(img,maxSide=420){
+    const k=Math.min(1,maxSide/Math.max(img.naturalWidth,img.naturalHeight));
+    const w=Math.max(1,Math.round(img.naturalWidth*k)),h=Math.max(1,Math.round(img.naturalHeight*k));
+    const c=document.createElement('canvas');c.width=w;c.height=h;const cctx=c.getContext('2d',{willReadFrequently:true});cctx.drawImage(img,0,0,w,h);
+    const rgba=cctx.getImageData(0,0,w,h).data;const rgb=new Uint8Array(w*h*3);
+    for(let s=0,d=0;s<rgba.length;s+=4){rgb[d++]=rgba[s];rgb[d++]=rgba[s+1];rgb[d++]=rgba[s+2];}
+    let binary='';const chunk=0x6000;for(let i=0;i<rgb.length;i+=chunk){binary+=String.fromCharCode(...rgb.subarray(i,Math.min(i+chunk,rgb.length)));}
+    return {width:w,height:h,pixels:btoa(binary)};
+  }
+  async function processImage(img){
+    setLoading(true,'Scanning visual contrast and connected regions…');
+    // Downsampled pixels are sent only to this app's own endpoint; no external service receives the image.
+    const raster=makeRaster(img,420);let result=null;const started=performance.now();
+    try{
+      if(location.protocol!=='file:'){
+        const response=await fetch('/api/dimension',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'analyze',width:raster.width,height:raster.height,pixels:raster.pixels,maxObjects:8})});
+        if(response.ok){const data=await response.json();if(data&&data.ok)result=data;else throw new Error(data&&data.error||'The local analysis endpoint returned an error.');}
+        else throw new Error('Local analysis endpoint responded '+response.status+'.');
+      }
+    }catch(err){console.warn('Backend analysis unavailable; running local fallback.',err);}
+    if(!result){setLoading(true,'Running in-browser fallback analysis…');result=analyzeFallback(raster);result.fallback=true;}
+    result.elapsedMs=Math.round(performance.now()-started);result.inputWidth=img.naturalWidth;result.inputHeight=img.naturalHeight;result.rasterWidth=raster.width;result.rasterHeight=raster.height;
+    analysis=result;drawResult(img,result);renderSummary(result);setLoading(false);$('resultLayout').classList.remove('hidden');$('downloadBtn').disabled=false;
+    toast(result.regions.length?`Analysis complete: ${result.regions.length} candidate region${result.regions.length===1?'':'s'} annotated.`:'Analysis complete. No confident object regions found.','success');
+  }
+
+  // Fallback is deliberately the same visual heuristic: border-colour saliency, morphology, and connected components.
+  function analyzeFallback(raster){
+    const {width:w,height:h,pixels:b64}=raster;let bin='';try{bin=atob(b64);}catch{}
+    const pix=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)pix[i]=bin.charCodeAt(i);
+    const n=w*h, border=[];for(let x=0;x<w;x+=Math.max(1,Math.floor(w/120))){border.push(x,x+(h-1)*w);}for(let y=0;y<h;y+=Math.max(1,Math.floor(h/120))){border.push(y*w,y*w+w-1);}
+    const med=ch=>{const a=border.map(p=>pix[p*3+ch]).sort((a,b)=>a-b);return a[Math.floor(a.length/2)]||0;};
+    const centers=[[med(0),med(1),med(2)]];for(let k=1;k<5;k++){let best=[128,128,128],bd=-1;for(const p of border){const c=[pix[p*3],pix[p*3+1],pix[p*3+2]];const d=Math.min(...centers.map(q=>(c[0]-q[0])**2+(c[1]-q[1])**2+(c[2]-q[2])**2));if(d>bd){bd=d;best=c;}}centers.push(best);}
+    for(let it=0;it<4;it++){const sums=centers.map(()=>[0,0,0,0]);for(const p of border){let k=0,bd=Infinity;for(let j=0;j<centers.length;j++){const c=centers[j],d=(pix[p*3]-c[0])**2+(pix[p*3+1]-c[1])**2+(pix[p*3+2]-c[2])**2;if(d<bd){bd=d;k=j;}}for(let z=0;z<3;z++)sums[k][z]+=pix[p*3+z];sums[k][3]++;}for(let j=0;j<centers.length;j++)if(sums[j][3])centers[j]=sums[j].slice(0,3).map(v=>v/sums[j][3]);}
+    const mask=new Uint8Array(n);for(let p=0;p<n;p++){const r=pix[p*3],g=pix[p*3+1],b=pix[p*3+2];let bd=Infinity;for(const c of centers)bd=Math.min(bd,Math.sqrt((r-c[0])**2+(g-c[1])**2+(b-c[2])**2));mask[p]=bd>43?1:0;}
+    const dilt=new Uint8Array(n),closed=new Uint8Array(n);for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){let v=0;for(let dy=-1;dy<=1&&!v;dy++)for(let dx=-1;dx<=1;dx++)if(mask[(y+dy)*w+x+dx]){v=1;break;}dilt[y*w+x]=v;}for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){let v=1;for(let dy=-1;dy<=1&&v;dy++)for(let dx=-1;dx<=1;dx++)if(!dilt[(y+dy)*w+x+dx]){v=0;break;}closed[y*w+x]=v;}
+    const seen=new Uint8Array(n),stack=new Int32Array(n),regions=[];const minArea=Math.max(22,Math.floor(n*.00035));
+    for(let p=0;p<n;p++){if(!closed[p]||seen[p])continue;let top=0;stack[top++]=p;seen[p]=1;let area=0,minX=w,minY=h,maxX=0,maxY=0,edge=0;while(top){const q=stack[--top],x=q%w,y=Math.floor(q/w);area++;minX=Math.min(minX,x);minY=Math.min(minY,y);maxX=Math.max(maxX,x);maxY=Math.max(maxY,y);if(x===0||y===0||x===w-1||y===h-1)edge++;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const xx=x+dx,yy=y+dy;if(xx<0||yy<0||xx>=w||yy>=h)continue;const z=yy*w+xx;if(closed[z]&&!seen[z]){seen[z]=1;stack[top++]=z;}}}const bw=maxX-minX+1,bh=maxY-minY+1,fill=area/(bw*bh);if(area>=minArea&&bw>=8&&bh>=8&&bw<w*.94&&bh<h*.94&&edge===0&&fill>.035)regions.push({x:minX,y:minY,w:bw,h:bh,area,quality:fill>.32?'medium':'low',label:'Candidate region'});}
+    regions.sort((a,b)=>b.area-a.area);const picked=regions.slice(0,8);if(!picked.length)picked.push({x:Math.round(w*.04),y:Math.round(h*.04),w:Math.round(w*.92),h:Math.round(h*.92),area:n,quality:'low',label:'Whole scene (fallback)'});
+    return {ok:true,width:w,height:h,regions:picked,method:'browser visual heuristic',warnings:['Visible spans are image pixels, not calibrated physical dimensions.'],background:'heuristic',fallback:true};
+  }
+
+  function drawResult(img,result){
+    const maxSide=3000,k=Math.min(1,maxSide/Math.max(img.naturalWidth,img.naturalHeight));const cw=Math.max(1,Math.round(img.naturalWidth*k)),ch=Math.max(1,Math.round(img.naturalHeight*k));
+    const c=document.createElement('canvas');c.width=cw;c.height=ch;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,cw,ch);
+    const sx=cw/result.width,sy=ch/result.height,scale=Math.max(.75,Math.min(2.2,cw/1000));const occupied=[];
+    const boxes=result.regions.map(r=>({x:r.x*sx,y:r.y*sy,w:r.w*sx,h:r.h*sy,region:r}));
+    // Draw region frames first.
+    boxes.forEach((b,i)=>{ctx.save();ctx.strokeStyle=colors[i%colors.length];ctx.lineWidth=Math.max(2,2.1*scale);ctx.setLineDash(i===0?[]:[8*scale,5*scale]);ctx.strokeRect(b.x,b.y,b.w,b.h);ctx.setLineDash([]);const text=`OBJECT ${i+1}`;ctx.font=`800 ${Math.round(13*scale)}px system-ui,sans-serif`;const tw=ctx.measureText(text).width;const hh=24*scale,xx=clamp(b.x,0,cw-tw-18*scale),yy=b.y>=hh?b.y-hh:clamp(b.y+3*scale,0,ch-hh);tag(ctx,text,xx,yy,tw+18*scale,hh,colors[i%colors.length],scale);occupied.push({x:xx,y:yy,w:tw+18*scale,h:hh});ctx.restore();});
+    boxes.forEach((b,i)=>{
+      const col=colors[i%colors.length],line=Math.max(1.7,1.8*scale),pad=7*scale;
+      // Visible width dimension with arrow heads and a collision-aware label.
+      const y=clamp(b.y+b.h-pad,Math.min(b.y+pad,ch-4),ch-4);drawArrow(ctx,b.x+pad,y,b.x+b.w-pad,y,col,line,scale);
+      const lw=Math.max(1,Math.round(b.region.w*img.naturalWidth/result.width)),lh=Math.max(1,Math.round(b.region.h*img.naturalHeight/result.height));const labelW=`L ${lw.toLocaleString()} px`,labelH=`H ${lh.toLocaleString()} px`;
+      let pos=placeTag(ctx,labelW,(b.x+b.w/2),y-15*scale,occupied,cw,ch,scale);tag(ctx,labelW,pos.x,pos.y,pos.w,pos.h,col,scale);occupied.push(pos);
+      // Image-space height, placed to the side of the region if room permits.
+      const x=clamp(b.x+b.w-pad,Math.min(b.x+pad,cw-4),cw-4);drawArrow(ctx,x,b.y+pad,x,b.y+b.h-pad,col,line,scale);
+      ctx.save();ctx.font=`800 ${Math.round(11*scale)}px system-ui,sans-serif`;const tw=ctx.measureText(labelH).width+17*scale;ctx.restore();
+      let hp=placeTag(ctx,labelH,x+tw*.44,(b.y+b.h/2),occupied,cw,ch,scale);tag(ctx,labelH,hp.x,hp.y,hp.w,hp.h,col,scale);occupied.push(hp);
+      // Depth cannot be read from a normal 2D photo; say so in-image rather than guessing.
+      const depth='B / depth: not visible';let dp=placeTag(ctx,depth,b.x+b.w/2,b.y+b.h+13*scale,occupied,cw,ch,scale);tag(ctx,depth,dp.x,dp.y,dp.w,dp.h,col,scale);occupied.push(dp);
+    });
+    annotatedCanvas=c;stage.className='stage';stage.innerHTML='';c.style.maxWidth='100%';c.style.maxHeight='calc(100vh - 205px)';c.style.height='auto';c.style.width='auto';stage.appendChild(c);
+    $('imageMeta').textContent=`${img.naturalWidth} × ${img.naturalHeight} px`;
+    $('regionStatus').textContent=`${boxes.length} candidate region${boxes.length===1?'':'s'} · image pixels`;
+  }
+  function visiblePixels(span,scale){return Math.max(1,Math.round(span/scale));}
+  function clamp(v,min,max){return Math.min(Math.max(v,min),Math.max(min,max));}
+  function tag(ctx,text,x,y,w,h,color,scale){ctx.save();ctx.fillStyle='rgba(5,11,21,.94)';ctx.strokeStyle=color;ctx.lineWidth=Math.max(1,scale);ctx.beginPath();ctx.roundRect(x,y,w,h,5*scale);ctx.fill();ctx.stroke();ctx.fillStyle='#f5f8ff';ctx.font=`800 ${Math.round(11*scale)}px system-ui,sans-serif`;ctx.textBaseline='middle';ctx.fillText(text,x+8*scale,y+h/2);ctx.restore();}
+  function drawArrow(ctx,x1,y1,x2,y2,color,line,scale){ctx.save();ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=line;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();const ang=Math.atan2(y2-y1,x2-x1),head=5*scale;for(const [x,y,a] of [[x1,y1,ang],[x2,y2,ang+Math.PI]]){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+head*Math.cos(a-.58),y+head*Math.sin(a-.58));ctx.lineTo(x+head*Math.cos(a+.58),y+head*Math.sin(a+.58));ctx.closePath();ctx.fill();}ctx.restore();}
+  function placeTag(ctx,text,cx,cy,occupied,cw,ch,scale){ctx.save();ctx.font=`800 ${Math.round(11*scale)}px system-ui,sans-serif`;const w=ctx.measureText(text).width+16*scale,h=22*scale;ctx.restore();const candidates=[[cx-w/2,cy-h/2],[cx-w/2,cy-h-7*scale],[cx-w/2,cy+7*scale],[cx-w/2- w*.5,cy-h/2],[cx+w*.05,cy-h/2]];for(const p of candidates){const x=clamp(p[0],2,cw-w-2),y=clamp(p[1],2,ch-h-2),r={x,y,w,h};if(!occupied.some(o=>intersects(r,o,2*scale)))return r;}return {x:clamp(candidates[0][0],2,cw-w-2),y:clamp(candidates[2][1],2,ch-h-2),w,h};}
+  function intersects(a,b,p=0){return a.x<b.x+b.w+p&&a.x+a.w>b.x-p&&a.y<b.y+b.h+p&&a.y+a.h>b.y-p;}
+  function renderSummary(result){
+    const regs=result.regions||[];$('regionCount').textContent=regs.length;$('detectStatus').textContent=regs.length?'Complete':'Limited';$('methodTag').textContent=result.fallback?'Browser fallback':'Internal algorithm';
+    const note=$('summaryNote');if(!regs.length){note.className='notice warn';note.innerHTML='<strong>No confident regions detected.</strong><br>Try a clearer, well-lit image with objects separated from the background. The app will not invent object sizes.';}else if(regs.length===1&&/fallback|scene/i.test(regs[0].label||'')){note.className='notice warn';note.innerHTML='<strong>Low visual separation.</strong><br>The algorithm could not confidently separate individual objects, so it marks a broad scene region. Review the overlay before relying on it.';}else{note.className='notice';note.innerHTML=`<strong>Automatic analysis finished.</strong><br>Found ${regs.length} visually separable candidate region${regs.length===1?'':'s'} in ${result.elapsedMs||0} ms. Width and height are visible spans in source-image pixels; region boundaries may need human review in complex scenes.`;}
+    const list=$('regionList');list.innerHTML='';if(!regs.length){list.innerHTML='<div class="empty-list">No regions to display.</div>';return;}
+    const sx=result.inputWidth/result.width,sy=result.inputHeight/result.height;
+    regs.forEach((r,i)=>{const quality=r.quality||'medium';const w=Math.max(1,Math.round(r.w*sx)),h=Math.max(1,Math.round(r.h*sy));const el=document.createElement('article');el.className='region';el.innerHTML=`<div class="region-top"><span class="swatch" style="background:${colors[i%colors.length]}"></span><span class="region-name">Object candidate ${i+1}</span><span class="quality ${quality==='high'?'':quality==='low'?'low':'medium'}">${quality==='high'?'Clear separation':quality==='low'?'Weak separation':'Possible region'}</span></div><div class="region-dims"><div class="dim"><label>L · VISIBLE WIDTH</label><b>${w.toLocaleString()} px</b></div><div class="dim"><label>H · VISIBLE HEIGHT</label><b>${h.toLocaleString()} px</b></div></div><div class="region-foot">B / depth: not recoverable from this single 2D view. Box: x ${Math.round(r.x*sx)}, y ${Math.round(r.y*sy)}.</div>`;list.appendChild(el);});
+  }
+  function downloadResult(){if(!annotatedCanvas){toast('Upload an image first.','error');return;}annotatedCanvas.toBlob(blob=>{if(!blob){toast('Could not export the image.','error');return;}const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`${sourceName}-dimension-map.png`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);toast('Annotated PNG exported.','success');},'image/png');}
+
+  // Built-in sample scene demonstrates the upload-to-result flow without using an external image.
+  $('demoBtn').addEventListener('click',()=>{
+    const c=document.createElement('canvas');c.width=840;c.height=560;const x=c.getContext('2d');x.fillStyle='#eef2f5';x.fillRect(0,0,c.width,c.height);
+    const grad=x.createLinearGradient(0,0,840,560);grad.addColorStop(0,'#dce4eb');grad.addColorStop(1,'#f7f8fa');x.fillStyle=grad;x.fillRect(0,0,840,560);
+    x.fillStyle='#c0cbd5';x.fillRect(0,450,840,110);x.strokeStyle='#b0becb';x.lineWidth=3;x.beginPath();x.moveTo(0,450);x.lineTo(840,450);x.stroke();
+    x.fillStyle='#447ba6';x.fillRect(108,180,220,260);x.fillStyle='#6d9bc0';x.beginPath();x.moveTo(108,180);x.lineTo(150,145);x.lineTo(370,145);x.lineTo(328,180);x.closePath();x.fill();x.fillStyle='#315e80';x.beginPath();x.moveTo(328,180);x.lineTo(370,145);x.lineTo(370,405);x.lineTo(328,440);x.closePath();x.fill();
+    x.fillStyle='#d98c4f';x.beginPath();x.roundRect(460,270,210,170,9);x.fill();x.fillStyle='#edb47f';x.beginPath();x.moveTo(460,270);x.lineTo(500,228);x.lineTo(710,228);x.lineTo(670,270);x.closePath();x.fill();x.fillStyle='#bd703d';x.beginPath();x.moveTo(670,270);x.lineTo(710,228);x.lineTo(710,398);x.lineTo(670,440);x.closePath();x.fill();
+    x.fillStyle='#f3d56b';x.beginPath();x.arc(545,125,47,0,Math.PI*2);x.fill();x.strokeStyle='#c49b37';x.lineWidth=5;x.stroke();x.fillStyle='#6e5b2a';x.fillRect(540,78,10,95);
+    const img=new Image();img.onload=()=>{originalImage=img;sourceName='arix-sample';processImage(img);};img.src=c.toDataURL('image/png');
+  });
+})();
+</script>
+</body>
+</html>
